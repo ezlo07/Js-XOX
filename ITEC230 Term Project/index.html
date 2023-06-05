@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TicTacToe</title>
+    <style>
+
+	button{
+		border-collapse: collapse;
+		position: absolute;
+		left: 50%;
+		margin-left: -155px;
+		top: 400px;
+		font-size: 25px;
+	}
+
+	p{
+		font-size: 50px;
+		margin-left: 700px;
+		text-align:  center;
+		vertical-align:  middle;
+	}
+
+	.timer{
+		font-size: 50px;
+		margin-left: 700px;
+		text-align:  center;
+		vertical-align:  middle;
+		margin-top: -40px;
+	}
+
+	span{
+		border-collapse: collapse;
+		position: absolute;
+		text-align:  center;
+		vertical-align:  middle;
+		margin-top: 200px;
+		font-size: 70px;
+	}
+
+	img{
+		height: 80px;
+		width: 80px;
+	}
+
+	td{
+		border:  2px solid #333;
+		height:  100px;
+		width:  100px;
+		text-align:  center;
+		vertical-align:  middle;
+		font-family:  "Comic Sans MS", cursive, sans-serif;
+		font-size:  70px;
+		cursor: pointer;
+    }
+
+	table {
+		border-collapse: collapse;
+		position: absolute;
+		left: 50%;
+		margin-left: -155px;
+		top: 50px;
+	}
+
+	table tr:first-child td {
+		border-top: 0;
+	}
+
+	table tr:last-child td {
+		border-bottom: 0;
+	}
+
+	table tr td:first-child {
+		border-left: 0;
+	}
+
+	table tr td:last-child {
+		border-right: 0;
+	}
+
+</style>
+</head>
+<body style="background-color: whitesmoke;">  
+	
+    <table>
+		<tr>
+			<td class="cell" id="0"></td>
+			<td class="cell" id="1"></td>
+			<td class="cell" id="2"></td>
+		</tr>
+		<tr>
+			<td class="cell" id="3"></td>
+			<td class="cell" id="4"></td>
+			<td class="cell" id="5"></td>
+		</tr>
+		<tr>
+			<td class="cell" id="6"></td>
+			<td class="cell" id="7"></td>
+			<td class="cell" id="8"></td>
+		</tr>
+	</table>
+
+	<p>Timer:</p>
+	<div id="timer" class="timer"></div>
+	<button type="reset" id="btn">Replay</button>
+	<center><span id="feedback"></span></center><br>
+	
+</body>
+<script>
+	var btn= document.getElementById("btn");
+	btn.addEventListener("click",reset,false);
+
+	var cells = document.getElementsByClassName("cell");
+	var x = 60;
+	var imgx = "<img id=\"x\" src=\"x.png\">";
+	var imgo = "<img id=\"o\" src=\"o.png\">";
+	var redx = "<img id='redx' src='redx.png'>";
+	var redo = "<img id='redo' src='redo.png'>"
+	var fback= document.getElementById("feedback");
+
+	for(var i=0; i<cells.length; i++){	
+		cells[i].addEventListener("click",function(e){
+			user(e);
+		},false);
+	}
+
+	document.addEventListener("click",checkfinish,true);
+	function checkfinish(e){
+		if(fback.innerHTML!="" && e.target.className=="cell"){
+			e.stopPropagation();
+			e.preventDefault();
+		}
+	}
+
+	function reset(){
+		window.location.reload();
+	}
+
+	function checkdraw(){
+		var allimg=document.querySelectorAll("img");
+	
+		if(allimg.length==9){
+			fback.innerHTML="Draw!";
+			checkfinish(e);
+		}
+	}
+
+	function pw(){
+
+		if(cells[0].innerHTML==imgo && cells[1].innerHTML==imgo && cells[2].innerHTML==imgo){
+			cells[0].innerHTML=redo;
+			cells[1].innerHTML=redo;
+			cells[2].innerHTML=redo;
+			fback.innerHTML="Player Wins!";
+			checkfinish(e);
+		}
+		else if(cells[3].innerHTML==imgo && cells[4].innerHTML==imgo && cells[5].innerHTML==imgo){
+			cells[3].innerHTML=redo;
+			cells[4].innerHTML=redo;
+			cells[5].innerHTML=redo;
+			fback.innerHTML="Player Wins!";
+			checkfinish(e);
+		}
+		else if(cells[6].innerHTML==imgo && cells[7].innerHTML==imgo && cells[8].innerHTML==imgo){
+			cells[6].innerHTML=redo;
+			cells[7].innerHTML=redo;
+			cells[8].innerHTML=redo;
+			fback.innerHTML="Player Wins!";
+			checkfinish(e);
+		}
+		else if(cells[0].innerHTML==imgo && cells[3].innerHTML==imgo && cells[6].innerHTML==imgo){
+			cells[0].innerHTML=redo;
+			cells[3].innerHTML=redo;
+			cells[6].innerHTML=redo;
+			fback.innerHTML="Player Wins!";
+			checkfinish(e);
+		}
+		else if(cells[1].innerHTML==imgo && cells[4].innerHTML==imgo && cells[7].innerHTML==imgo){
+			cells[1].innerHTML=redo;
+			cells[4].innerHTML=redo;
+			cells[7].innerHTML=redo;
+			fback.innerHTML="Player Wins!";
+			checkfinish(e);
+		}
+		else if(cells[2].innerHTML==imgo && cells[5].innerHTML==imgo && cells[8].innerHTML==imgo){
+			cells[2].innerHTML=redo;
+			cells[5].innerHTML=redo;
+			cells[8].innerHTML=redo;
+			fback.innerHTML="Player Wins!";
+			checkfinish(e);
+		}
+		else if(cells[0].innerHTML==imgo && cells[4].innerHTML==imgo && cells[8].innerHTML==imgo){
+			cells[0].innerHTML=redo;
+			cells[4].innerHTML=redo;
+			cells[8].innerHTML=redo;
+			fback.innerHTML="Player Wins!";
+			checkfinish(e);
+		}
+		else if(cells[2].innerHTML==imgo && cells[4].innerHTML==imgo && cells[6].innerHTML==imgo){
+			cells[2].innerHTML=redo;
+			cells[4].innerHTML=redo;
+			cells[6].innerHTML=redo;
+			fback.innerHTML="Player Wins!";
+			checkfinish(e);
+		}
+		else{
+			randomer(); 
+			checkdraw();
+		} 
+	}
+
+	function cw(){
+		if(cells[0].innerHTML==imgx && cells[1].innerHTML==imgx && cells[2].innerHTML==imgx){
+			cells[0].innerHTML=redx;
+			cells[1].innerHTML=redx;
+			cells[2].innerHTML=redx;
+			fback.innerHTML="Computer Wins!";
+			checkfinish(e);
+		}
+		else if(cells[3].innerHTML==imgx && cells[4].innerHTML==imgx && cells[5].innerHTML==imgx){
+			cells[3].innerHTML=redx;
+			cells[4].innerHTML=redx;
+			cells[5].innerHTML=redx;
+			fback.innerHTML="Computer Wins!";
+			checkfinish(e);
+		}
+		else if(cells[6].innerHTML==imgx && cells[7].innerHTML==imgx && cells[8].innerHTML==imgx){
+			cells[6].innerHTML=redx;
+			cells[7].innerHTML=redx;
+			cells[8].innerHTML=redx;
+			fback.innerHTML="Computer Wins!";
+			checkfinish(e);
+		}
+		else if(cells[0].innerHTML==imgx && cells[3].innerHTML==imgx && cells[6].innerHTML==imgx){
+			cells[0].innerHTML=redx;
+			cells[3].innerHTML=redx;
+			cells[6].innerHTML=redx;
+			fback.innerHTML="Computer Wins!";
+			checkfinish(e);
+		}
+		else if(cells[1].innerHTML==imgx && cells[4].innerHTML==imgx && cells[7].innerHTML==imgx){
+			cells[1].innerHTML=redx;
+			cells[4].innerHTML=redx;
+			cells[7].innerHTML=redx;
+			fback.innerHTML="Computer Wins!";
+			checkfinish(e);
+		}
+		else if(cells[2].innerHTML==imgx && cells[5].innerHTML==imgx && cells[8].innerHTML==imgx){
+			cells[2].innerHTML=redx;
+			cells[5].innerHTML=redx;
+			cells[8].innerHTML=redx;
+			fback.innerHTML="Computer Wins!";
+			checkfinish(e);
+		}
+		else if(cells[0].innerHTML==imgx && cells[4].innerHTML==imgx && cells[8].innerHTML==imgx){
+			cells[0].innerHTML=redx;
+			cells[4].innerHTML=redx;
+			cells[8].innerHTML=redx;
+			fback.innerHTML="Computer Wins!";
+			checkfinish(e);
+		}
+		else if(cells[2].innerHTML==imgx && cells[4].innerHTML==imgx && cells[6].innerHTML==imgx){
+			cells[2].innerHTML=redx;
+			cells[4].innerHTML=redx;
+			cells[6].innerHTML=redx;
+			fback.innerHTML="Computer Wins!";
+			checkfinish(e);
+		}
+		else{
+			checkdraw();
+		}
+	}
+
+	onTimer();
+	function onTimer(){
+  		document.getElementById('timer').innerHTML = x;
+  		x--;
+
+  		if (x < 0) {
+    		fback.innerHTML="Computer Wins!";checkfinish(e);
+  		}
+  		else if(fback.innerHTML=="Computer Wins!"){
+			document.getElementById('timer').innerHTML="You Lose!"
+		}
+  		else if(fback.innerHTML=="Player Wins!"){
+			document.getElementById('timer').innerHTML="You Win!"
+  		}
+		else if(fback.innerHTML=="Draw!"){
+			document.getElementById('timer').innerHTML="Refresh Page!"
+		}
+  		else {
+    		setTimeout(onTimer, 1000);
+  		}
+	}
+
+	randomer();
+	function user(e){
+		if(e.target.id==="0" && cells[0].innerHTML=="") {
+			cells[0].innerHTML=imgo;
+			pw();
+		}
+		else if(e.target.id==="1" && cells[1].innerHTML=="") {
+			cells[1].innerHTML=imgo;
+			pw();
+		}
+		else if(e.target.id==="2" && cells[2].innerHTML=="") {
+			cells[2].innerHTML=imgo;
+			pw();
+		}
+		else if(e.target.id==="3" && cells[3].innerHTML=="") {
+			cells[3].innerHTML=imgo;
+			pw();
+		}
+		else if(e.target.id==="4" && cells[4].innerHTML=="") {
+			cells[4].innerHTML=imgo;
+			pw();
+		}
+		else if(e.target.id==="5" && cells[5].innerHTML=="") {
+			cells[5].innerHTML=imgo;
+			pw();
+		}
+		else if(e.target.id==="6" && cells[6].innerHTML=="") {
+			cells[6].innerHTML=imgo;
+			pw();
+		}
+		else if(e.target.id==="7" && cells[7].innerHTML=="") {
+			cells[7].innerHTML=imgo;
+			pw();
+		}
+		else if(e.target.id==="8" && cells[8].innerHTML=="") {
+			cells[8].innerHTML=imgo;
+			pw();
+		}
+	}
+
+	function randomer(){
+		var random=Math.floor(Math.random()*9);
+
+		if(random==0 && cells[0].innerHTML==""){
+			cells[0].innerHTML=imgx;
+			cw();
+		}
+		else if(random==1 && cells[1].innerHTML==""){
+			cells[1].innerHTML=imgx;
+			cw();
+		}
+		else if(random==2 && cells[2].innerHTML==""){
+			cells[2].innerHTML=imgx;
+			cw();
+		}
+		else if(random==3 && cells[3].innerHTML==""){
+			cells[3].innerHTML=imgx;
+			cw();
+		}
+		else if(random==4 && cells[4].innerHTML==""){
+			cells[4].innerHTML=imgx;
+			cw();
+		}
+		else if(random == 5 && cells[5].innerHTML==""){
+			cells[5].innerHTML=imgx;
+			cw();
+		}
+		else if(random==6 && cells[6].innerHTML==""){
+			cells[6].innerHTML=imgx;
+			cw();
+		}
+		else if(random==7 && cells[7].innerHTML==""){
+			cells[7].innerHTML=imgx;
+			cw();
+		}
+		else if(random==8 && cells[8].innerHTML==""){
+			cells[8].innerHTML=imgx;
+			cw();
+		}
+		else{
+			randomer();
+			cw();
+		} 
+	}
+</script>
+</html>
